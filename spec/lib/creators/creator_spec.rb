@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class Log
-  def self.error(message)
+  def self.error(exception)
 
   end
 end
