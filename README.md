@@ -35,18 +35,8 @@ end
 ## Defining a creator
 
 We recommend puting all your creator objects in `app/creators`.
-Here's how we defined our projects creator
 
-```
- |--Save Life Cycle
- |--|--before_build
- |--|--build_model
- |--|--after_build
- |--|--before_save
- |--|--after_save
-```
- 
-
+Here's how we defined our projects creator:
 
 ```ruby
 class ProjectCreator < Creators::Base
@@ -93,6 +83,16 @@ Callback methods: `before_build`, `after_build`
 
 2) `save` - Simply calls `@model.save`.
 Callback methods: `before_save`, `after_save`
+
+```
+ |--Save Life Cycle
+ |--|--before_build
+ |--|--build_model
+ |--|--after_build
+ |--|--before_save
+ |--|--after_save
+```
+
 
 ## Want to update your model? No problems!
 
