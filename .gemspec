@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Itay Adler", "Shay Davidson", "Yonatan Bergman"]
   s.email       = ["itayadler@gmail.com", "shay.h.davidson@gmail.com", "lighthawky@gmail.com"]
   s.homepage    = "https://github.com/TheGiftsProject/creators"
-  s.summary     = %q{Making it even nicer to manage Form data params in your Controller, for }
-  s.description = %q{A Creator is a class that let's you manage }
+  s.summary     = %q{Making it even nicer to manage Form data params in your Controller.}
+  s.description = %q{Creators are used to host code dealing with creation of new models and clean up the controllers. }
 
   s.files         = `git ls-files`.split("\n")
   s.require_path  = "lib"
