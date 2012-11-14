@@ -1,4 +1,4 @@
-# Creators 0.9  [![Build Status](https://secure.travis-ci.org/TheGiftsProject/creators.png)](http://travis-ci.org/TheGiftsProject/creators)
+# Creators 0.9  [![Build Status](https://secure.travis-ci.org/TheGiftsProject/Creators.png)](http://travis-ci.org/TheGiftsProject/Creators)
 
 Creators are used to host code dealing with creation of new models and clean up the controllers.
 
@@ -42,7 +42,7 @@ on our creator.
 So that's it, our controller is clean from all the setup that's needed to create a new Project model, and we have a
 happy-sad flow, to portroy our controller's story.
 
-Let's take a look at how this was all made possible:
+Let's take a look at how a Creator looks like:
 
 * Our creator for the Project model is called `project_creator.rb` and we put it in `app/creators`:
 
@@ -63,10 +63,12 @@ class ProjectCreator < Creators::Base
     end
 
     def after_build
-        project.members.build(refine_admin)
+        project.members.build(refined_admin)
     end
 
-    def refine_admin
+    private
+
+    def refined_admin
         {
         :role => :admin,
         :name => @user.name
@@ -93,8 +95,6 @@ in the build process instead of it creating a new one.
 2) `save` - Simply calls `@model.save`.
 Callback methods: `before_save`, `after_save`
 
-In case something goes wrong, meaning the Creator save method returned false, simply access the `errors` method
-to get an array of the errors that occurred.
 
 ## Requirements
 
