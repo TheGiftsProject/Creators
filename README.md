@@ -38,8 +38,12 @@ We recommend puting all your creator objects in `app/creators`.
 Here's how we defined our projects creator
 
 ```
- |--
- `--
+ |--Save Life Cycle
+ |--|--before_build
+ |--|--build_model
+ |--|--after_build
+ |--|--before_save
+ |--|--after_save
 ```
  
 
