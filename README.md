@@ -3,7 +3,7 @@
 Creators help you clean up your controllers from the setup that's required for creating or updating your model.
 For the most basic situations simply creating a Creator and passing into it the request params, will just work for
 creating a new model, but if you'll require adding custom validations, slicing up garbage params or refining a new
-Hash of params to be used for the Model attributes, then a Creator is the home for all that.
+Hash of params to be used for the Model attributes, then a Creator is also the home for all that.
 
 ## Usage
 
