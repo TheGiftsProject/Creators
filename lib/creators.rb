@@ -1,5 +1,6 @@
 require 'active_support/dependencies'
 require 'creators/version'
+require 'rails/engine'
 
 module Creators
   class Engine < ::Rails::Engine
