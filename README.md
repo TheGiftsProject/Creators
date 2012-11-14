@@ -5,15 +5,16 @@ For the most basic situations simply creating a Creator and passing into it the 
 creating a new model, but if you'll require adding custom validations, slicing up garbage params or refining a new
 Hash of params to be used for the Model attributes, then a Creator is also the home for all that.
 
-## Usage
+## Installation
 
-Note: The examples are for a Rails 3 app.
-
-* Add our gem to your Gemfile:
+Just add the creators gem to your Gemfile
 
 `gem 'creators'`
 
-Let's just dive right in to the `ProjectController.rb` example:
+## Usage
+
+This example shows a very simple happy-sad flow for creating a project model using a creator.
+We can access the newely created project model when the creation is successful or the errors array if it's not.
 
 ```ruby
 class ProjectController < ApplicationController
@@ -31,19 +32,17 @@ class ProjectController < ApplicationController
 end
 ```
 
-So as you can see from the controller, this Rails app is for managing projects, and in this app we have the main
-Project model. Looking briefly at the code shows that in case the creator save method worked without any issues,
-we get a saved model that can be accessed by the `project` method, and we can then call `redirect_to` to that project.
+## Defining a creator
 
-In case something goes wrong, the creator `save` yields false, and we can simply log the errors by accessing `errors`
-on our creator.
+We recommend puting all your creator objects in `app/creators`.
+Here's how we defined our projects creator
 
-Our controller is now clean from all the setup that's needed to create a new Project model, and we have a
-happy-sad flow, to portroy our controller's story.
+```
+ |--
+ `--
+```
+ 
 
-Let's take a look at how a Creator looks like:
-
-* Our creator for the Project model is called `project_creator.rb` and we put it in `app/creators`:
 
 ```ruby
 class ProjectCreator < Creators::Base
@@ -53,15 +52,15 @@ class ProjectCreator < Creators::Base
         super(raw_params)
     end
 
-    def before_build
+    def before_build # optional
         error("project", "must be an hash") unless @params[:project].is_a? Hash
     end
 
-    def refine_params
+    def refine_params # optional
         @params[:project]
     end
 
-    def after_build
+    def after_build # optional
         project.members.build(refined_admin)
     end
 
@@ -76,9 +75,9 @@ class ProjectCreator < Creators::Base
 end
 ```
 
-A Creator requires the `raw_params` from the request, but as you can see in this example we've also initialized
-the ProjectCreator with a current_user (Represents the current logged in user in the system), just to show that you
-can use it with other data objects / models that are connected to your model (The Project model in this example).
+A Creator simply requires the `raw_params` from the request, 
+you can also add any other data that you might need. 
+For example in the ProjectsCreator we need the current_user.
 
 The specific behavior of your Creator is defined in the `refine_params` method and the callback methods, that compose
 the Save method Life Cycle. The Creator `save` method is divided into 2 main steps:
@@ -121,6 +120,7 @@ class TaskCreator < Creators::Base
     def refine_params
         params[:task]
     end
+
 end
 ```
 
