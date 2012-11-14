@@ -1,9 +1,9 @@
 # Creators 0.9  [![Build Status](https://secure.travis-ci.org/TheGiftsProject/Creators.png)](http://travis-ci.org/TheGiftsProject/Creators)
 
-Creators help you clean up your controllers from the setup that's required for creating or updating your model.
+Creators help to clean up your controllers from the model creation setup code.
 For the most basic situations simply creating a Creator and passing into it the request params, will just work for
-creating a new model, but if you'll require adding custom validations, slicing up garbage params or refining a new
-Hash of params to be used for the Model attributes, then a Creator is also the home for all that.
+creating a new model, and if you'll require adding custom validations, slicing up garbage params or refining a new
+Hash of params to be used for the Model attributes, then a Creator is the home for all that.
 
 ## Installation
 
@@ -14,10 +14,10 @@ Just add the creators gem to your Gemfile
 ## Usage
 
 This example shows a very simple happy-sad flow for creating a project model using a creator.
-We can access the newely created project model when the creation is successful or the errors array if it's not.
+You can access the newly created project model when the creation is successful or the errors array if it's not.
 
 ```ruby
-class ProjectController < ApplicationController
+class ProjectsController < ApplicationController
 
     def create
         project_creator = ProjectCreator.new(params, current_user)
@@ -34,9 +34,8 @@ end
 
 ## Defining a creator
 
-We recommend puting all your creator objects in `app/creators`.
-
-Here's how we defined our projects creator:
+We recommend putting all your creator objects in `app/creators`.
+The model class that's attached to the creator is deduced from the name of the class.
 
 ```ruby
 class ProjectCreator < Creators::Base
@@ -85,12 +84,12 @@ Callback methods: `before_build`, `after_build`
 Callback methods: `before_save`, `after_save`
 
 ```
- |--Save Life Cycle
- |--|--before_build
- |--|--build_model
- |--|--after_build
- |--|--before_save
- |--|--after_save
+ |-- Save Life Cycle
+ |--|-- before_build
+ |--|-- refine_params
+ |--|-- after_build
+ |--|-- before_save
+ |--|-- after_save
 ```
 
 
@@ -99,7 +98,7 @@ Callback methods: `before_save`, `after_save`
 Here's an example for a creator for the Task model, it relates to the Project model with a belongs_to association.
 
 ```ruby
-class TaskController < ApplicationController
+class TasksController < ApplicationController
 
     def update
         current_task = current_project.tasks.find_by_id(params[:task][:id])
@@ -126,11 +125,9 @@ class TaskCreator < Creators::Base
     end
 
 end
-```
 
-For update operations, if we pass to super a model as the 2nd argument, then that model will be used
+For update operations, if you pass to super a model as the 2nd argument, then that model will be used
 in the build process instead of it creating a new one, in case that model isn't nil.
-
 
 ## Requirements
 
