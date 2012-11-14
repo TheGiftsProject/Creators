@@ -2,7 +2,7 @@ require 'active_support/dependencies'
 require 'creators/version'
 
 module Creators
-  class Engine < Rails::Engine
+  class Engine < ::Rails::Engine
     initializer 'creators.autoload', :before => :set_autoload_paths do |app|
       app.config.autoload_paths += Dir["#{config.root}/app/creators/**/"]
     end
