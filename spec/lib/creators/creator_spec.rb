@@ -31,10 +31,28 @@ describe Creators::Base do
     end
   end
 
+  class AnotherFakeModel
+  end
+
   class FakeModelCreator < Creators::Base
   end
 
+  class AnotherFakeModelCreator < Creators::Base
+    model 'FakeModel'
+  end
+
   subject { FakeModelCreator.new }
+
+  describe 'self.model' do
+
+    let(:another_creator) { AnotherFakeModelCreator.new }
+
+    it 'should override the target model of the Creator (which is implied from the Creator name)' do
+      another_creator.klass.should == FakeModel
+      another_creator.klass.should_not == AnotherFakeModel
+    end
+
+  end
 
   describe :save do
 
