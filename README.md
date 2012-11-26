@@ -1,4 +1,4 @@
-# Creators 0.9  [![Build Status](https://secure.travis-ci.org/TheGiftsProject/Creators.png)](http://travis-ci.org/TheGiftsProject/Creators)
+# Creators 0.91  [![Build Status](https://secure.travis-ci.org/TheGiftsProject/Creators.png)](http://travis-ci.org/TheGiftsProject/Creators)
 
 Creators help to clean up your controllers from the model creation setup code.
 For the most basic situations simply creating a Creator and passing into it the request params, will just work for
@@ -35,7 +35,10 @@ end
 ## Defining a creator
 
 We recommend putting all your creator objects in `app/creators`.
+
 The model class that's attached to the creator is deduced from the name of the class.
+You can override this behavior by adding a `model` definition to the creator (`model 'AnotherModel'`).
+
 
 ```ruby
 class ProjectCreator < Creators::Base
@@ -76,7 +79,7 @@ The specific behavior of your Creator is defined in the `refine_params` method a
 the Save method Life Cycle. The Creator `save` method is divided into 2 main steps:
 
 1) `build` - This step simply instantiates a new model (Project in our example) and assigns to it the `raw_params` we've
-passed to the Creator. The `refine_params` step by default just uses the `raw_params`, and it can be easily overrided by
+passed to the Creator. The `refine_params` step by default just uses the `raw_params`, and it can be easily overridden by
 using the `refine_params` method. (As shown in our example)
 Callback methods: `before_build`, `after_build`
 

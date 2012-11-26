@@ -1,3 +1,3 @@
 module Creators
-  VERSION = 0.9
+  VERSION = 0.91
 end
