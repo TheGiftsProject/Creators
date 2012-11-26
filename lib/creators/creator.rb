@@ -27,13 +27,17 @@ module Creators
     def self.inherited(child_class)
       child_class.class_eval do
         class_name = child_class.to_s.gsub('Creator', '')
-        define_method :klass do
-          class_name.constantize
-        end
+        self.model(class_name)
+      end
+    end
 
-        define_method class_name.underscore do
-          model
-        end
+    def self.model(class_name)
+      define_method :klass do
+        class_name.constantize
+      end
+
+      define_method class_name.underscore do
+        model
       end
     end
 
